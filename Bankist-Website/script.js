@@ -32,19 +32,19 @@ document.addEventListener('keydown', function (e) {
 
 // 187. Selecting, Creating, and Deleting Elements ---------------
 
-console.log(document.documentElement);
-console.log(document.head);
-console.log(document.body);
+// console.log(document.documentElement);
+// console.log(document.head);
+// console.log(document.body);
 
 const header = document.querySelector('.header');
 const allSections = document.querySelectorAll('.section');
-console.log(allSections);
+// console.log(allSections);
 
 document.getElementById('section--1');
 const allButtons = document.getElementsByTagName('button');
-console.log(allButtons);
+// console.log(allButtons);
 
-console.log(document.getElementsByClassName('btn'));
+// console.log(document.getElementsByClassName('btn'));
 
 // Creating and inserting  elements
 // .insertAdjacentHTML;
@@ -69,3 +69,98 @@ document
     message.remove();
     // message.parentElement.removeChild(message); old way
   });
+
+// 188. -----------------------------------------------------------------
+// Styles
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+// console.log(message.style.color);
+// console.log(message.style.backgroundColor);
+
+// console.log(getComputedStyle(message).color);
+// console.log(getComputedStyle(message).height);
+
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+// document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// Attributes
+const logo = document.querySelector('.nav__logo');
+// console.log(logo.alt);
+// console.log(logo.className);
+
+// logo.alt = 'Beautiful minimalist logo';
+
+// Non-standard
+// console.log(logo.designer); // undefined
+// console.log(logo.getAttribute('designer')); // Jonas
+// logo.setAttribute('company', 'Bankist');
+
+// console.log(logo.src); // http://127.0.0.1:5500/Bankist-Website/img/logo.png
+// console.log(logo.getAttribute('src')); // img/logo.png
+
+const link = document.querySelector('.nav__link--btn');
+// console.log(link.href);
+// console.log(link.getAttribute('href'));
+
+// Data attributes
+// console.log(logo.dataset.versionNumber);
+
+// Classes
+logo.classList.add('a', 'j');
+logo.classList.remove('a');
+logo.classList.toggle('a');
+logo.classList.contains('a');
+
+// Don't use because this will overrde all the existing classes
+// logo.className = 'jonas';
+
+// 189. -----------------------------------------------------------------
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  // console.log(s1coords);
+
+  // console.log(e.target.getBoundingClientRect());
+
+  // console.log('Current scroll (X/Y', window.pageXOffset, window.pageYOffset); // from edge of browser to the top of the page (if scrolled down);
+
+  // console.log(
+  //   'heigh/width viewport',
+  //   document.documentElement.clientHeight,
+  //   document.documentElement.clientWidth
+  // ); // current rectangle window - if console if opened it will be smaller ** excludes scroll-bars
+
+  // Scrolling - old way
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+// 190. -----------------------------------------------------------------
+
+const h1 = document.querySelector('h1');
+
+const alertH1 = function (e) {
+  alert('addEventListener: Great! You are reading the heading :D');
+
+  // h1.removeEventListener('mouseenter', alertH1);  // option I
+};
+
+h1.addEventListener('mouseenter', alertH1);
+
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000); // option II
+
+// old-school
+// h1.onmouseenter = function (e) {
+//   alert('addEventListener: Great! You are reading the heading :D');
+// };
+
+// 192. -----------------------------------------------------------------
