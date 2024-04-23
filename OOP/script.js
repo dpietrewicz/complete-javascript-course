@@ -36,7 +36,7 @@ Person.prototype.calcAge = function () {
 // jonas.calcAge();
 // matilda.calcAge();
 
-// console.log(jonas.__proto__);
+// console.log(jonas);
 // console.log(jonas.__proto__ === Person.prototype);
 
 // console.log(Person.prototype.isPrototypeOf(jonas));
@@ -48,3 +48,46 @@ Person.prototype.species = "Homo Sapiens";
 
 // console.log(jonas.hasOwnProperty("firstName")); // true
 // console.log(jonas.hasOwnProperty("spieces")); // false
+
+console.log(jonas.__proto__); //Object.prototype (top of prototype chain)
+console.log(jonas.__proto__.__proto__);
+console.log(jonas.__proto__.__proto__.__proto__);
+
+console.dir(Person.prototype.constructor);
+
+const arr = [3, 6, 4, 5, 6, 7, 5]; // new Array === []
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype);
+
+Array.prototype.unique = function () {
+    return [...new Set(this)];
+};
+
+console.log(arr.unique());
+
+const h1 = document.querySelector("h1");
+
+// Coding Challenge #1
+
+const Car = function (make, speed) {
+    this.make = make;
+    this.speed = speed;
+};
+
+Car.prototype.accelerate = function () {
+    console.log((this.speed += 10));
+};
+
+Car.prototype.brake = function () {
+    console.log((this.speed -= 5));
+};
+
+const car1 = new Car("BMW", 120);
+const car2 = new Car("Mercedes", 95);
+
+car1.accelerate();
+car1.accelerate();
+car1.accelerate();
+car2.brake();
+car2.brake();
+car2.brake();
