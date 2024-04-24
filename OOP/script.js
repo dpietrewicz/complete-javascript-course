@@ -1,5 +1,5 @@
 "use strict";
-
+/*
 // 209. ----------
 
 const Person = function (firstName, birthYear) {
@@ -67,7 +67,7 @@ console.log(arr.unique());
 
 const h1 = document.querySelector("h1");
 
-// Coding Challenge #1
+// Coding Challenge #1 ------------------
 
 const Car = function (make, speed) {
     this.make = make;
@@ -91,3 +91,83 @@ car1.accelerate();
 car2.brake();
 car2.brake();
 car2.brake();
+*/
+
+// 214. ES6 Classes -------
+/*
+// class expression
+// const PersonlCl = class {};
+
+// class declaration
+class PersonCl {
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+    }
+
+    // Methods will be added to .prototype property
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    }
+
+    greet = function () {
+        console.log(`Hey ${this.firstName}`);
+    };
+
+    get age() {
+        return 2037 - this.birthYear;
+    }
+
+    // Set a property that already exists
+    // if this kind of "set" is created, then "get" is needed
+    set fullName(name) {
+        if (name.includes(" ")) this._fullName = name;
+        else alert(`${name} is not a full name!`);
+    }
+
+    get fullName() {
+        return this._fullName;
+    }
+}
+
+const jessica = new PersonCl("Jessica Davis", 1996);
+console.log(jessica);
+jessica.calcAge();
+console.log(jessica.age);
+console.log(jessica.__proto__ === PersonCl.prototype);
+
+// Proof that the class hides the true nature of prototypal inheritance in JS
+// PersonCl.prototype.greet = function () {
+//     console.log(`Hey ${this.firstName}`);
+// };
+
+jessica.greet();
+
+const walter = new PersonCl("Walter Moore", 1965);
+
+// 1. Classes are NOT hoisted
+// 2. Class are first-class citizes
+// 3. Classes are executed in strict mode
+
+// 215. Setter and Getters ------
+
+const account = {
+    owner: "Jonas",
+    movements: [200, 530, 120, 300],
+
+    get latest() {
+        return this.movements.slice(-1).pop();
+    },
+
+    set latest(mov) {
+        this.movements.push(mov);
+    },
+};
+
+console.log(account.latest);
+
+account.latest = 50;
+console.log(account.movements);
+*/
+
+// 215.
