@@ -67,31 +67,6 @@ console.log(arr.unique());
 
 const h1 = document.querySelector("h1");
 */
-// Coding Challenge #1 ------------------
-/*
-const Car = function (make, speed) {
-    this.make = make;
-    this.speed = speed;
-};
-
-Car.prototype.accelerate = function () {
-    console.log((this.speed += 10));
-};
-
-Car.prototype.brake = function () {
-    console.log((this.speed -= 5));
-};
-
-const car1 = new Car("BMW", 120);
-const car2 = new Car("Mercedes", 95);
-
-car1.accelerate();
-car1.accelerate();
-car1.accelerate();
-car2.brake();
-car2.brake();
-car2.brake();
-*/
 
 // 214. ES6 Classes -------
 /*
@@ -205,37 +180,41 @@ const sarah = Object.create(PersonProto);
 sarah.init("Sarah", 1979);
 sarah.calcAge();
 */
-// Coding Challenge #2
-/*
-class CarCl {
-    constructor(make, speed) {
-        this.make = make;
-        this.speed = speed;
-    }
 
-    accelerate() {
-        this.speed += 10;
-        console.log(`${this.make} is going at ${this.speed} km/h`);
-    }
+// 219. Inheritance between classes - Constructor Funtions
 
-    brake() {
-        this.speed -= 5;
-        console.log(`${this.make} is going at ${this.speed} km/h`);
-    }
+const Person = function (firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+};
+Person.prototype.calcAge = function () {
+    console.log(2037 - this.birthYear);
+};
 
-    get speedUS() {
-        return this.speed / 1.6;
-    }
+const Student = function (firstName, birthYear, course) {
+    Person.call(this, firstName, birthYear);
+    this.course = course;
+};
 
-    set speedUS(speed) {
-        this.speed = speed * 1.6;
-    }
-}
-const ford = new CarCl("Ford", 120);
-console.log(ford.speedUS);
-ford.accelerate();
-ford.brake();
+// Student.prototype is now an object that inherits from Person.prototype. Then Student.Prototype is empty (resets), so only after we can add methods, like introduce
+Student.prototype = Object.create(Person.prototype);
 
-ford.speedUS = 50;
-console.log(ford);
-*/
+Student.prototype.introduce = function () {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const mike = new Student("Mike", 2020, "Computer Science");
+const amber = new Student("Amber", 1999, "Cooking");
+console.log();
+mike.introduce();
+mike.calcAge();
+
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+console.log(mike instanceof Object);
+
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
