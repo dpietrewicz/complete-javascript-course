@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 // 209. ----------
 /*
@@ -314,45 +314,69 @@ jay.init("Jay", 2010, "Computer Science");
 */
 
 // 223. Another Class Example ---------------
+// 225.  Encapsulation        ---------------
+
+// 1) Public fields
+// 2) Private fields
+// 3) Public methods
+// 4) Private methods
+// (there is also the static version)
 
 class Account {
-    constructor(owner, currency, pin) {
-        this.owner = owner;
-        this.currency = currency;
-        this.pin = pin;
-        // protected property
-        this._movements = [];
-        this.locale = navigator.language;
+   // 1) Public fields (instances, not on prototype)
+   locale = navigator.language;
 
-        console.log(`Thanks for opening an account, ${owner}`);
-    }
+   // 2) Private fields (instances, not on prototype)
+   #movements = [];
+   #pin;
 
-    // Puiblic interface
-    getMovements() {
-        return this._movements;
-    }
+   // 3) Public methods - same as Public interface state below
 
-    deposit(val) {
-        this._movements.push(val);
-    }
+   constructor(owner, currency, pin) {
+      this.owner = owner;
+      this.currency = currency;
+      this.#pin = pin;
+      // protected property
+      this._movements = [];
+      this.locale = navigator.language;
 
-    wirthdraw(val) {
-        this.deposit(-val);
-    }
+      console.log(`Thanks for opening an account, ${owner}`);
+   }
 
-    _approveLoan(val) {
-        return true;
-    }
+   // Public interface
+   getMovements() {
+      return this.#movements;
+   }
 
-    requestLoan(val) {
-        if (this._approveLoan(val)) {
-            this.deposit(val);
-            console.log(`Loan approved`);
-        }
-    }
+   deposit(val) {
+      this.#movements.push(val);
+      return this;
+   }
+
+   wirthdraw(val) {
+      this.deposit(-val);
+      return this;
+   }
+
+   requestLoan(val) {
+      if (this._approveLoan(val)) {
+         this.deposit(val);
+         console.log(`Loan approved`);
+      }
+      return this;
+   }
+
+   static helper() {
+      console.log('Hello');
+   }
+
+   // 4) Private methods
+   _approveLoan(val) {
+      return true;
+   }
 }
 
-const acc1 = new Account("Jonas", "EUR", 1111);
+const acc1 = new Account('Jonas', 'EUR', 1111);
 console.log(acc1);
 
 // acc1._movements.push(250);
@@ -361,10 +385,15 @@ console.log(acc1);
 acc1.deposit(250);
 acc1.wirthdraw(140);
 acc1.requestLoan(1000);
-acc1._approveLoan(1000);
+
 console.log(acc1.getMovements());
-
 console.log(acc1);
-console.log(acc1.pin);
+Account.helper();
+// console.log(acc1.#pin); // SyntaxError
+// console.log(acc1.#movements); // SyntaxError
+// console.log(acc1.#approveLoan(1000));
 
-// 225.  Encapsulation ---------------
+// 226.  Chaining methods ---------------
+// returning method will make method chainable
+acc1.deposit(300).deposit(500).wirthdraw(35).requestLoan(25000).wirthdraw(4000);
+console.log(acc1.getMovements());
