@@ -26,7 +26,7 @@ const car2 = new Car("Mercedes", 95);
 // car2.brake();
 */
 // Coding Challenge #2 -------------------
-/*
+
 class CarCl {
     constructor(make, speed) {
         this.make = make;
@@ -41,6 +41,7 @@ class CarCl {
     brake() {
         this.speed -= 5;
         console.log(`${this.make} is going at ${this.speed} km/h`);
+        return this;
     }
 
     get speedUS() {
@@ -51,6 +52,7 @@ class CarCl {
         this.speed = speed * 1.6;
     }
 }
+/*
 const ford = new CarCl("Ford", 120);
 console.log(ford.speedUS);
 ford.accelerate();
@@ -93,3 +95,39 @@ tesla.accelerate();
 tesla.brake();
 console.log(tesla);
 */
+
+// Coding Challenge #4 ----------
+
+class EVCl extends CarCl {
+    #charge;
+
+    constructor(make, speed, charge) {
+        super(make, speed);
+        this.#charge = charge;
+    }
+
+    chargeBattery(chargeTo) {
+        this.#charge = chargeTo;
+        return this;
+    }
+
+    accelerate() {
+        const speed = this.speed * 0.02;
+        const charge = this.#charge * 0.01;
+
+        console.log(
+            `${this.make} going at ${
+                this.speed + speed
+            }km/h, with a charge of ${this.#charge}%`
+        );
+        return this;
+    }
+}
+
+const tesla = new EVCl("Tesla", 120, 40);
+
+// console.log(tesla);
+// tesla.accelerate();
+// tesla.chargeBattery();
+tesla.accelerate().chargeBattery(60).brake().accelerate();
+// console.log(tesla.#charge);
