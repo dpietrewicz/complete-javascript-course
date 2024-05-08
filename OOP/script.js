@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 // 209. ----------
 /*
@@ -323,60 +323,60 @@ jay.init("Jay", 2010, "Computer Science");
 // (there is also the static version)
 
 class Account {
-   // 1) Public fields (instances, not on prototype)
-   locale = navigator.language;
+    // 1) Public fields (instances, not on prototype)
+    locale = navigator.language;
 
-   // 2) Private fields (instances, not on prototype)
-   #movements = [];
-   #pin;
+    // 2) Private fields (instances, not on prototype)
+    #movements = [];
+    #pin;
 
-   // 3) Public methods - same as Public interface state below
+    // 3) Public methods - same as Public interface state below
 
-   constructor(owner, currency, pin) {
-      this.owner = owner;
-      this.currency = currency;
-      this.#pin = pin;
-      // protected property
-      this._movements = [];
-      this.locale = navigator.language;
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this.#pin = pin;
+        // protected property
+        this._movements = [];
+        this.locale = navigator.language;
 
-      console.log(`Thanks for opening an account, ${owner}`);
-   }
+        console.log(`Thanks for opening an account, ${owner}`);
+    }
 
-   // Public interface
-   getMovements() {
-      return this.#movements;
-   }
+    // Public interface
+    getMovements() {
+        return this.#movements;
+    }
 
-   deposit(val) {
-      this.#movements.push(val);
-      return this;
-   }
+    deposit(val) {
+        this.#movements.push(val);
+        return this;
+    }
 
-   wirthdraw(val) {
-      this.deposit(-val);
-      return this;
-   }
+    wirthdraw(val) {
+        this.deposit(-val);
+        return this;
+    }
 
-   requestLoan(val) {
-      if (this._approveLoan(val)) {
-         this.deposit(val);
-         console.log(`Loan approved`);
-      }
-      return this;
-   }
+    requestLoan(val) {
+        if (this._approveLoan(val)) {
+            this.deposit(val);
+            console.log(`Loan approved`);
+        }
+        return this;
+    }
 
-   static helper() {
-      console.log('Hello');
-   }
+    static helper() {
+        console.log("Hello");
+    }
 
-   // 4) Private methods
-   _approveLoan(val) {
-      return true;
-   }
+    // 4) Private methods
+    _approveLoan(val) {
+        return true;
+    }
 }
 
-const acc1 = new Account('Jonas', 'EUR', 1111);
+const acc1 = new Account("Jonas", "EUR", 1111);
 console.log(acc1);
 
 // acc1._movements.push(250);
